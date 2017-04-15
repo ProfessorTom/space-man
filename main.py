@@ -1,6 +1,5 @@
 import random
 from classes.events import Event
-from classes.game import bcolors
 from classes.game import Energy
 
 running = True
@@ -36,7 +35,8 @@ print(instructions)
 while running:
 
     if energy.current <= 0:
-        print(bcolors.FAIL + '\nGame Over! Your ship sustained too much damage.\n' + bcolors.ENDC)
+        print('\nGame Over! Your ship sustained too much damage.\n')
+        energy.display()
         running = False
         break
 
@@ -50,11 +50,11 @@ while running:
     current_event.show()
 
     if current_event.key_input(): # Checks if correct key solution was entered
-        print(bcolors.OKGREEN + "Problem solved!" + bcolors.ENDC)
-        print(bcolors.OKGREEN + "Great work!" + bcolors.ENDC)
+        print("Problem solved!")
+        print("Great work!")
         continue
     else:
         energy.current -= current_event.dmg
-        print(bcolors.FAIL + "Incorrect!" + bcolors.ENDC)
-        print(bcolors.FAIL + "You have lost " + str(current_event.dmg) + " energy" + bcolors.ENDC)
+        print("Incorrect!")
+        print("You have lost " + str(current_event.dmg) + " energy")
         continue
