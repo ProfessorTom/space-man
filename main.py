@@ -1,6 +1,26 @@
 import random
+import time
+from threading import Timer
 from classes.events import Event
 from classes.game import Energy
+
+def input_with_timeout(x): # function for inputting with a time limit
+
+    def time_up():
+        print ("\nTime up! Enter any key to continue.")
+
+    t = Timer(x,time_up) # x is amount of time in seconds
+    t.start()
+    try:
+        answer = input("Enter key: ")
+    except Exception:
+        print('pass\n')
+        answer = None
+
+    if answer != True:
+        t.cancel()       # time_up will not execute(so, no skip)
+
+    return answer
 
 running = True
 energy = Energy(100)
@@ -40,6 +60,8 @@ num_events = len(event_list) - 1 # number of events
 
 # Start of game
 print(instructions)
+begin = input("Press any key to continue")
+
 while running:
 
     if energy.current <= 0:
@@ -50,13 +72,19 @@ while running:
         break
 
     energy.display()
+    time.sleep(1)
 
     chance = random.randint(0, num_events) # Creates random number
 
     current_event = event_list[chance] # randomly chooses current event
     current_event.show()
 
-    if current_event.key_input(): # Checks if correct key solution was entered
+    key = current_event.generate_key()
+    print("Type " + key + " to solve the problem")
+
+    answer = input_with_timeout(5)
+
+    if answer == key : # Checks if correct key solution was entered
         print("Problem solved!")
         print("Great work!")
         score += 10
@@ -67,7 +95,7 @@ while running:
         continue
     else:
         energy.current -= current_event.dmg
-        print("Incorrect!")
+        print("You entered an incorrect code or you ran out of time!")
         print("You have lost " + str(current_event.dmg) + " energy")
         score += 1
         successful_loops = 0
