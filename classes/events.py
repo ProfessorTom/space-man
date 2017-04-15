@@ -14,12 +14,10 @@ class Event:
         print(self.name + "!!!")
 
 
-    def key_input(self): # Checks user's input against a key
+    def generate_key(self): # Generate a random key
 
         # Randomize key
         i = random.randint(0, self.len_rand_words)
         random_key = str(random.randint(100, 999)) + self.rand_words[i]
 
-        print("Type " + random_key + " to solve the problem")
-        key_input = input()
-        return key_input == random_key
+        return random_key
