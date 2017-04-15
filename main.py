@@ -26,6 +26,7 @@ running = True
 energy = Energy(100)
 score = 0
 successful_loops = 0
+time = 0
 
 instructions = """
 ********************************************************************************
@@ -87,8 +88,17 @@ while running:
     key = current_event.generate_key()
     print("Type " + key + " to solve the problem")
 
+    # Determines how much time user has to answer
+    time = 5
+    if successful_loops == 10:
+        time = 4
+    elif successful_loops == 20:
+        time = 3
+    elif successful_loops == 30:
+        time = 2
+
     # Getting user input
-    answer = input_with_timeout(5) # number in parenthesis is how many seconds you have left
+    answer = input_with_timeout(time) # number in parenthesis is how many seconds you have left
 
     # Checks if correct key solution was entered
     if answer == key :
