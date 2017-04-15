@@ -45,7 +45,7 @@ while running:
     if energy.current <= 0:
         print('\nGame Over! Your ship sustained too much damage.\n')
         energy.display()
-        print("Your score is " + score)
+        print("Your score is " + str(score))
         running = False
         break
 
