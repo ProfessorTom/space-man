@@ -64,27 +64,35 @@ begin = input("Press any key to continue")
 
 while running:
 
+    # Checking if you are dead
     if energy.current <= 0:
         print('\nGame Over! Your ship sustained too much damage.\n')
         energy.display()
         print("Your score is " + str(score))
         running = False
+        time.sleep(5)
         break
 
+    # Displaying your current energy
     energy.display()
     time.sleep(1)
 
     chance = random.randint(0, num_events) # Creates random number
 
-    current_event = event_list[chance] # randomly chooses current event
+    # Selects random event
+    current_event = event_list[chance]
     current_event.show()
 
+    # Create a random key
     key = current_event.generate_key()
     print("Type " + key + " to solve the problem")
 
-    answer = input_with_timeout(5)
+    # Getting user input
+    answer = input_with_timeout(5) # number in parenthesis is how many seconds you have left
 
-    if answer == key : # Checks if correct key solution was entered
+    # Checks if correct key solution was entered
+    if answer == key :
+        # correct answer
         print("Problem solved!")
         print("Great work!")
         score += 10
@@ -94,6 +102,7 @@ while running:
             print("5 or more successful events in a row! Here's 5 energy!")
         continue
     else:
+        # incorrect answer
         energy.current -= current_event.dmg
         print("You entered an incorrect code or you ran out of time!")
         print("You have lost " + str(current_event.dmg) + " energy")
