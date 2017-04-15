@@ -1,4 +1,6 @@
 import random
+import threading
+import time
 
 class Event:
 
@@ -13,10 +15,8 @@ class Event:
     def show(self): # Prints the current event and the solution
         print(self.name + "!!!")
 
+    def random_key(self): # Generates a random keycode
 
-    def generate_key(self): # Generate a random key
-
-        # Randomize key
         i = random.randint(0, self.len_rand_words)
         random_key = str(random.randint(100, 999)) + self.rand_words[i]
 
