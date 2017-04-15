@@ -5,7 +5,7 @@ class Energy():
         self.current = current
         self.max = 100
 
-    def display(self): # prints the current energy as a "health bar"
+    def display(self): # prints the current energy as a "health bar" using loops
         i = 0
         if self.current <= 0:
             self.current = 0
