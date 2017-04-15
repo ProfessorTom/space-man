@@ -5,6 +5,7 @@ from classes.game import Energy
 running = True
 energy = Energy(100)
 score = 0
+successful_loops = 0
 
 instructions = """
 ********************************************************************************
@@ -59,10 +60,15 @@ while running:
         print("Problem solved!")
         print("Great work!")
         score += 10
+        successful_loops += 1
+        if successful_loops >= 5:
+            energy.current += 5
+            print("5 or more successful events in a row! Here's 5 energy!")
         continue
     else:
         energy.current -= current_event.dmg
         print("Incorrect!")
         print("You have lost " + str(current_event.dmg) + " energy")
         score += 1
+        successful_loops = 0
         continue
