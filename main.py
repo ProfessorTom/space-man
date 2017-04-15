@@ -26,7 +26,7 @@ running = True
 energy = Energy(100)
 score = 0
 successful_loops = 0
-time = 0
+time_left = 0
 
 instructions = """
 ********************************************************************************
@@ -89,13 +89,13 @@ while running:
     print("Type " + key + " to solve the problem")
 
     # Determines how much time user has to answer
-    time = 5
+    time_left = 5
     if successful_loops == 10:
-        time = 4
+        time_left = 4
     elif successful_loops == 20:
-        time = 3
+        time_left = 3
     elif successful_loops == 30:
-        time = 2
+        time_left = 2
 
     # Getting user input
     answer = input_with_timeout(time) # number in parenthesis is how many seconds you have left
