@@ -2,12 +2,12 @@ import random
 
 class Event:
 
-    def __init__(self, name, dmg_lo, dmg_hi):
+    def __init__(self, name, dmg_lo, dmg_hi, rand_words):
         self.name = name
         self.dmg_lo = dmg_lo
         self.dmg_hi = dmg_hi
         self.dmg = random.randint(dmg_lo, dmg_hi)
-        self.rand_words = ["fix", "help", "wer", "djg", "wot"]
+        self.rand_words = rand_words
         self.len_rand_words = len(self.rand_words) - 1
 
     def show(self): # Prints the current event and the solution
