@@ -11,16 +11,20 @@ def input_with_timeout(x): # function for inputting with a time limit
     def time_up():
         print ("\nTime up! Enter any key to continue.")
 
-    t = Timer(x,time_up) # x is amount of time in seconds
+    t = Timer(10,time_up) # x is amount of time in seconds
+    t.name = "countdown timer"
+
     t.start()
+
     try:
         answer = input("Enter key: ")
+        t.cancel()
     except Exception:
         print('pass\n')
         answer = None
 
-    if answer != True:
-        t.cancel()       # time_up will not execute(so, no skip)
+    # if answer != True:
+    #     t.cancel()       # time_up will not execute(so, no skip)
 
     return answer
 
@@ -96,7 +100,7 @@ while running:
         time_left = 2
 
     # Getting user input
-    answer = input_with_timeout(time) # number in parenthesis is how many seconds you have left
+    answer = input_with_timeout(time_left) # number in parenthesis is how many seconds you have left
 
     # Checks if correct key solution was entered
     if answer == key :
