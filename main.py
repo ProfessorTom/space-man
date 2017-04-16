@@ -3,6 +3,8 @@ import time
 from threading import Timer
 from classes.events import Event
 from classes.game import Energy
+from functions.helpers import playerIsDead
+
 
 def input_with_timeout(x): # function for inputting with a time limit
 
@@ -65,17 +67,13 @@ begin = input("Press any key to continue")
 
 while running:
 
-    # Checking if you are dead
-    if energy.current <= 0:
-        print('\nGame Over! Your ship sustained too much damage.\n')
-        energy.display()
-        print("Your score is " + str(score))
+    if playerIsDead(energy, score):
         running = False
-        time.sleep(5)
-        break
+        break # needed to kill game loop
 
     # Displaying your current energy
     energy.display()
+
     time.sleep(1)
 
     chance = random.randint(0, num_events) # Creates random number
